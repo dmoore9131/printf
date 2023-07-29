@@ -1,10 +1,12 @@
-#include <stdio.h>
+#include "main.h"
 
 int main(void)
 {
-    /* Print a message to the console. */
-printf("Hello, World!\n");
+    int len;
 
-/* Return 0 to indicate successful program execution. */
-return 0;
+    len = _printf("Hello, %c! This is a %s test %%\n", 'W', "printf");
+    _printf("Number of characters printed: %d\n", len);
+
+    return (0);
 }
+
