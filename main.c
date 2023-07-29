@@ -1,11 +1,10 @@
 // main.c
-#include <stdio.h>
 
-int main(void) {
-    // Call your custom printf function here to test its functionality
-    // For example:
-    printf("Hello, %s!\n", "World");
+#include "main.h"
 
-    return 0;
+int main(void)
+{
+    _printf("%S\n", "Best\nSchool");
+    return (0);
 }
 
