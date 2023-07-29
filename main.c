@@ -1,19 +1,34 @@
-#include "main.h"
+// main.c
+#include <stdio.h>
+#include "u_handler.c"
+#include "o_handler.c"
+#include "x_handler.c"
+#include "X_handler.c"
 
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    char buffer[1024] = {0};
+int main() {
+    unsigned int num = 42;
 
-    printf("print_unsigned: %d\n", print_unsigned(123, buffer, 0, 0, 0));
-    printf("print_octal: %d\n", print_octal(123, buffer, 0, 0, 0));
-    printf("print_hexadecimal: %d\n", print_hexadecimal(123, buffer, 0, 0, 0));
-    printf("print_hexa: %d\n", print_hexa(123, "0123456789abcdef", buffer, 0, 'x', 0, 0));
+    char conversion_specifier = 'u'; // Change this to 'o', 'x', or 'X' for different conversions
 
-    return (0);
+    switch (conversion_specifier) {
+        case 'u':
+            print_u(num);
+            break;
+        case 'o':
+            print_o(num);
+            break;
+        case 'x':
+            print_x(num);
+            break;
+        case 'X':
+            print_X(num);
+            break;
+        default:
+            printf("Invalid conversion specifier\n");
+    }
+
+    printf("\n");
+
+    return 0;
 }
 
