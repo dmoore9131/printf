@@ -1,56 +1,62 @@
-#include <string.h> // For strlen
+#include <stdio.h>
 #include <stdarg.h>
-#include <stdio.h> // For snprintf
-
-// Function to process the format specifiers and return a string
-char *process_format_specifier(const char *format, va_list args);
+#include "main.h"
 
 /**
- * handle_print - Handles the format specifiers and prints to the buffer
- * @format: Format string
- * @pos: Pointer to the current position in the format string
- * @list: Argument list
- * @buffer: Buffer to store the output
- * @flags: Flags for formatting
- * @width: Field width
- * @precision: Precision value
- * @size: Size modifier
+ * _printf - Custom implementation of printf function
+ * @format: Format string containing conversion specifiers
  *
- * Return: Number of characters printed.
+ * Return: The number of characters printed
  */
-int handle_print(const char *format, int *pos, va_list list,
-	char buffer[], int flags, int width, int precision, int size)
+int _printf(const char *format, ...)
 {
-	int printed_chars = 0;
+    va_list args;
+    int count = 0;
+    char c;
+    char *str;
 
-	// Call the function to process the format specifier and get the result string
-	char *result = process_format_specifier(format + *pos, list);
+    va_start(args, format);
 
-	if (result != NULL)
-	{
-		int len = strlen(result);
+    while (*format)
+    {
+        if (*format != '%')
+        {
+            putchar(*format);
+            count++;
+        }
+        else
+        {
+            format++;
+            switch (*format)
+            {
+                case 'c':
+                    c = va_arg(args, int);
+                    putchar(c);
+                    count++;
+                    break;
+                case 's':
+                    str = va_arg(args, char *);
+                    while (*str)
+                    {
+                        putchar(*str);
+                        str++;
+                        count++;
+                    }
+                    break;
+                case '%':
+                    putchar('%');
+                    count++;
+                    break;
+                default:
+                    putchar('%');
+                    putchar(*format);
+                    count += 2;
+            }
+        }
+        format++;
+    }
 
-		// Write the result string to the buffer
-		for (int i = 0; i < len; i++)
-		{
-			buffer[*pos] = result[i];
-			(*pos)++;
-			printed_chars++;
-			// If the buffer is full, print it and reset the buffer index
-			if (*pos == BUFF_SIZE)
-			{
-				print_buffer(buffer, pos);
-			}
-		}
-		// Free the result string
-		free(result);
-	}
-	else
-	{
-		// If the result is NULL (an error occurred), return -1 to indicate an error
-		printed_chars = -1;
-	}
-
-	return printed_chars;
+    va_end(args);
+    return count;
 }
 
