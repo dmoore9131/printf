@@ -1,10 +1,10 @@
+// _printf.c
+
 #include "main.h"
 #include <stdarg.h>
 
 int _printf(const char *format, ...)
 {
-    (void)format; // Suppress unused parameter warning
-
     int printed_chars = 0;
     va_list args;
     va_start(args, format);

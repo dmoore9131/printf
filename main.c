@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #include <limits.h>
 #include <stdio.h>
+=======
+// main.c
+
+>>>>>>> 892db4b5e22e6d0744d41ec7c6aa6d20464718ed
 #include "main.h"
 
 /**
@@ -9,6 +14,7 @@
  */
 int main(void)
 {
+<<<<<<< HEAD
     int len;
     int len2;
     unsigned int ui;
@@ -40,5 +46,9 @@ int main(void)
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
+=======
+    _printf("%S\n", "Best\nSchool");
+>>>>>>> 892db4b5e22e6d0744d41ec7c6aa6d20464718ed
     return (0);
 }
+
