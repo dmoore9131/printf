@@ -1,37 +1,25 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-// Function to convert the integer value and write to the output file
-void convertAndWrite(FILE *output, int value) {
-    fprintf(output, "%d\n", value);
+void print_integer(int num) 
+{
+    printf("%d\n", num); /* Use %d for signed decimal integer */
 }
 
-int main() {
-    FILE *input, *output;
-    input = fopen("input.txt", "r");
-    output = fopen("output.txt", "w");
+int main(void) 
+{
+    int num;
 
-    if (input == NULL || output == NULL) {
-        printf("Error opening files.\n");
-        return 1;
-    }
+    /* Get input from the user */
+    printf("Enter an integer: ");
+    scanf("%d", &num);
 
-    char format[5];
-    int value;
+    /* Print the integer using both %d and %i conversion specifiers */
+    printf("Using %%d: ");
+    print_integer(num);
 
-    // Read input from the input file and process until the end
-    while (fscanf(input, "%4s %d", format, &value) != EOF) {
-        if (format[0] == '%' && (format[1] == 'd' || format[1] == 'i')) {
-            convertAndWrite(output, value);
-        } else {
-            fprintf(output, "Invalid format: %s\n", format);
-        }
-    }
+    printf("Using %%i: ");
+    print_integer(num);
 
-    fclose(input);
-    fclose(output);
-
-    printf("Conversion completed. Check the output.txt file.\n");
     return 0;
 }
 
