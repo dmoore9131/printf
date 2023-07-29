@@ -47,7 +47,7 @@ int print_octal(va_list types, char buffer[],
 
     // Placeholder implementation for demonstration purposes
     // You can modify this as per your requirements
-    sprintf(buffer, "%o", num);
+    sprintf(buffer, "%lo", num);
 
     return 0; // Replace with actual number of characters printed
 }
@@ -146,7 +146,17 @@ int print_binary(va_list types, char buffer[],
 
     // Placeholder implementation for demonstration purposes
     // You can modify this as per your requirements
-    sprintf(buffer, "%lb", num);
+    sprintf(buffer, "%lu", num); // Convert to decimal first
+    // Then convert decimal to binary
+    unsigned long int binary = 0;
+    int digit, place = 1;
+    while (num != 0) {
+        digit = num % 2;
+        binary += digit * place;
+        place *= 10;
+        num /= 2;
+    }
+    sprintf(buffer, "%lu", binary);
 
     return 0; // Replace with actual number of characters printed
 }
